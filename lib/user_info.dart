@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
 class UserInfo extends StatefulWidget {
-  const UserInfo(
-      {super.key, required this.id, required this.phone, required this.name});
+  const UserInfo({
+    super.key,
+    required this.id,
+    required this.phone,
+    required this.name,
+    required this.onDeletePressed,
+    required this.onEditPressed,
+  });
   final String name, phone, id;
+  final void Function() onDeletePressed, onEditPressed;
 
   @override
   State<UserInfo> createState() => _UserInfoState();
@@ -17,7 +24,7 @@ class _UserInfoState extends State<UserInfo> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            radius: 30.0,
+            radius: 20.0,
             child: Text(
               widget.id,
             ),
@@ -27,6 +34,7 @@ class _UserInfoState extends State<UserInfo> {
           width: 10.0,
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               widget.name,
@@ -40,6 +48,17 @@ class _UserInfoState extends State<UserInfo> {
               style: const TextStyle(fontSize: 14.0, color: Colors.grey),
             ),
           ],
+        ),
+        const Spacer(),
+        IconButton(
+          onPressed: widget.onEditPressed,
+          icon: const Icon(Icons.edit),
+          color: Colors.blue,
+        ),
+        IconButton(
+          onPressed: widget.onDeletePressed,
+          icon: const Icon(Icons.delete_outline),
+          color: Colors.red,
         ),
       ],
     );
